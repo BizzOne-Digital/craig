@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>http://localhost:5173/</loc></url>
+  <url><loc>http://localhost:5173/about</loc></url>
+  <url><loc>http://localhost:5173/services</loc></url>
+  <url><loc>http://localhost:5173/shop</loc></url>
+  <url><loc>http://localhost:5173/booking</loc></url>
+  <url><loc>http://localhost:5173/team</loc></url>
+  <url><loc>http://localhost:5173/pricing</loc></url>
+  <url><loc>http://localhost:5173/blog</loc></url>
+  <url><loc>http://localhost:5173/contact</loc></url>
+  <url><loc>http://localhost:5173/testimonials</loc></url>
+  <url><loc>http://localhost:5173/faq</loc></url>
+  <url><loc>http://localhost:5173/privacy</loc></url>
+  <url><loc>http://localhost:5173/terms</loc></url>
+  <url><loc>http://localhost:5173/shipping-returns</loc></url>
+  <url><loc>http://localhost:5173/disclaimer</loc></url>
+</urlset>
