@@ -153,6 +153,24 @@ cd ../backend && npm start
 
 Serve `frontend/dist` via Vercel (or similar). Host the API on Render, Railway, or another Node platform.
 
+### Vercel (frontend)
+
+The repo root has no `package.json`; the Vite app lives in `frontend/`. A root `vercel.json` tells Vercel how to build it.
+
+1. Import the GitHub repo in Vercel (leave **Root Directory** empty / `.`).
+2. Vercel will use `vercel.json`: install in `frontend/`, build to `frontend/dist`, SPA rewrites for React Router.
+3. Add **Environment Variables** in the Vercel project:
+
+| Variable | Example |
+|----------|---------|
+| `VITE_API_BASE_URL` | `https://your-api.onrender.com/api` |
+| `VITE_APP_URL` | `https://your-site.vercel.app` |
+| `VITE_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key |
+
+4. Redeploy after saving env vars.
+
+**Alternative:** set Vercel **Root Directory** to `frontend` instead — Vite auto-detection works; `frontend/vercel.json` handles SPA routing.
+
 **Suggested deployment**
 
 | Layer | Platform |
