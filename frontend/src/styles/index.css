@@ -182,6 +182,31 @@
     min-width: 44px;
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-animate .hero-eyebrow,
+    .hero-animate .hero-line-white,
+    .hero-animate .hero-line-red,
+    .hero-animate .hero-body,
+    .hero-animate .hero-cta,
+    .hero-animate .hero-pricing {
+      opacity: 0;
+    }
+
+    .hero-animate .hero-eyebrow,
+    .hero-animate .hero-body,
+    .hero-animate .hero-cta {
+      transform: translateY(24px);
+    }
+
+    .hero-animate .hero-line-white {
+      transform: translateY(60px);
+    }
+
+    .hero-animate .hero-line-red {
+      transform: translateY(80px);
+    }
+  }
+
   .display-xl {
     font-size: var(--text-display-xl);
   }

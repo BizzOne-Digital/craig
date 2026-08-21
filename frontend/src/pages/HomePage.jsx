@@ -104,12 +104,12 @@ export default function HomePage() {
     if (prefersReducedMotion() || !heroRef.current) return undefined;
 
     const ctx = gsap.context(() => {
-      gsap.from('.hero-eyebrow', { y: 20, opacity: 0, duration: 0.6, delay: 0.2 });
-      gsap.from('.hero-line-white', { y: 60, opacity: 0, duration: 0.8, delay: 0.35, ease: 'power4.out' });
-      gsap.from('.hero-line-red', { y: 80, opacity: 0, duration: 0.9, delay: 0.5, ease: 'power4.out' });
-      gsap.from('.hero-body', { y: 24, opacity: 0, duration: 0.7, delay: 0.75 });
-      gsap.from('.hero-cta', { y: 20, opacity: 0, stagger: 0.1, duration: 0.6, delay: 0.95 });
-      gsap.from('.hero-pricing', { opacity: 0, duration: 0.6, delay: 1.15 });
+      gsap.to('.hero-eyebrow', { y: 0, opacity: 1, duration: 0.6, delay: 0.2 });
+      gsap.to('.hero-line-white', { y: 0, opacity: 1, duration: 0.8, delay: 0.35, ease: 'power4.out' });
+      gsap.to('.hero-line-red', { y: 0, opacity: 1, duration: 0.9, delay: 0.5, ease: 'power4.out' });
+      gsap.to('.hero-body', { y: 0, opacity: 1, duration: 0.7, delay: 0.75 });
+      gsap.to('.hero-cta', { y: 0, opacity: 1, stagger: 0.1, duration: 0.6, delay: 0.95 });
+      gsap.to('.hero-pricing', { opacity: 1, duration: 0.6, delay: 1.15 });
 
       gsap.to('.hero-bg-img', {
         scale: 1.08,
@@ -172,7 +172,7 @@ export default function HomePage() {
       {/* Hero — mockup layout with full-bleed background image */}
       <section
         ref={heroRef}
-        className="relative -mt-[var(--header-height)] min-h-[100svh] overflow-hidden bg-black"
+        className="hero-animate relative -mt-[var(--header-height)] min-h-[100svh] overflow-hidden bg-black"
       >
         {/* Background image — right weighted */}
         <div className="absolute inset-0">

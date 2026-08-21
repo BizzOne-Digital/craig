@@ -57,10 +57,14 @@ export function CinematicIntro({ onComplete }) {
     const root = rootRef.current;
     if (!root) return undefined;
 
+    let cancelled = false;
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         defaults: { ease: 'power3.out' },
-        onComplete: finish,
+        onComplete: () => {
+          if (!cancelled) finish();
+        },
       });
 
       timelineRef.current = tl;
@@ -80,6 +84,7 @@ export function CinematicIntro({ onComplete }) {
     }, root);
 
     return () => {
+      cancelled = true;
       ctx.revert();
       timelineRef.current = null;
       document.body.classList.remove('intro-active');
