@@ -58,7 +58,7 @@ export default function BookingPage() {
 
   useEffect(() => {
     getServices()
-      .then((res) => setServices(res.data || []))
+      .then((res) => setServices(Array.isArray(res.data) ? res.data : []))
       .catch(() => setServices([]))
       .finally(() => setLoadingServices(false));
   }, []);

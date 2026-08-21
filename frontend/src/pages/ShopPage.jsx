@@ -27,7 +27,7 @@ export default function ShopPage() {
 
   useEffect(() => {
     getProducts({ active: true, limit: 100 })
-      .then((res) => setProducts(res.data || []))
+      .then((res) => setProducts(Array.isArray(res.data) ? res.data : []))
       .catch(() => setError('Unable to load products. Please try again later.'))
       .finally(() => setLoading(false));
   }, []);

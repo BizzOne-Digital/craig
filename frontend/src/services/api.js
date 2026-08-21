@@ -11,8 +11,19 @@ const api = axios.create({
   },
 });
 
+function isHtmlPayload(data) {
+  return typeof data === 'string' && data.trimStart().startsWith('<!');
+}
+
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (isHtmlPayload(response.data)) {
+      const normalized = new Error('API unavailable');
+      normalized.status = response.status;
+      return Promise.reject(normalized);
+    }
+    return response;
+  },
   (error) => {
     const payload = error.response?.data;
     const message = payload?.message || error.message || 'Request failed';

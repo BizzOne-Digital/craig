@@ -44,7 +44,11 @@ export default function ProductDetailPage() {
     if (!product?.category) return;
     getProducts({ category: product.category, limit: 4, active: true })
       .then((res) => {
-        setRelated((res.data || []).filter((p) => p.slug !== product.slug).slice(0, 3));
+        setRelated(
+          (Array.isArray(res.data) ? res.data : [])
+            .filter((p) => p.slug !== product.slug)
+            .slice(0, 3)
+        );
       })
       .catch(() => setRelated([]));
   }, [product]);

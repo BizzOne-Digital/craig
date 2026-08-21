@@ -28,7 +28,7 @@ export default function PricingPage() {
 
   useEffect(() => {
     getServices()
-      .then((res) => setServices(res.data || []))
+      .then((res) => setServices(Array.isArray(res.data) ? res.data : []))
       .catch(() => setError('Unable to load pricing information.'))
       .finally(() => setLoading(false));
   }, []);

@@ -64,7 +64,9 @@ export default function HomePage() {
 
     getServices()
       .then((res) => {
-        if (!cancelled) setServices(res.data?.slice(0, 3) || []);
+        if (!cancelled) {
+          setServices(Array.isArray(res.data) ? res.data.slice(0, 3) : []);
+        }
       })
       .catch(() => {
         if (!cancelled) setErrorServices('Unable to load services.');
@@ -75,7 +77,7 @@ export default function HomePage() {
 
     getProducts({ featured: true, limit: 4, active: true })
       .then((res) => {
-        if (!cancelled) setProducts(res.data || []);
+        if (!cancelled) setProducts(Array.isArray(res.data) ? res.data : []);
       })
       .catch(() => {
         if (!cancelled) setErrorProducts('Unable to load featured products.');
@@ -86,7 +88,11 @@ export default function HomePage() {
 
     getTestimonials()
       .then((res) => {
-        if (!cancelled) setTestimonials((res.data || []).filter((t) => t.featured).slice(0, 3));
+        if (!cancelled) {
+          setTestimonials(
+            Array.isArray(res.data) ? res.data.filter((t) => t.featured).slice(0, 3) : []
+          );
+        }
       })
       .catch(() => {
         if (!cancelled) setTestimonials([]);

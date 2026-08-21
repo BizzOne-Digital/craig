@@ -12,7 +12,7 @@ export default function TestimonialsPage() {
 
   useEffect(() => {
     getTestimonials()
-      .then((res) => setTestimonials(res.data || []))
+      .then((res) => setTestimonials(Array.isArray(res.data) ? res.data : []))
       .catch(() => setError('Unable to load testimonials.'))
       .finally(() => setLoading(false));
   }, []);

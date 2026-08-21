@@ -20,7 +20,7 @@ export default function ServicesPage() {
 
   useEffect(() => {
     getServices()
-      .then((res) => setServices(res.data || []))
+      .then((res) => setServices(Array.isArray(res.data) ? res.data : []))
       .catch(() => setError('Unable to load services. Please try again later.'))
       .finally(() => setLoading(false));
   }, []);
