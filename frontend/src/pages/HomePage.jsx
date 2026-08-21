@@ -201,11 +201,11 @@ export default function HomePage() {
               Justice • Advocacy • Support
             </p>
 
-            <h1 className="font-display leading-[0.88]">
-              <span className="hero-line-white block text-[clamp(2rem,9vw,5.5rem)] tracking-[0.04em] text-white">
+            <h1 className="max-w-full overflow-hidden font-display leading-[0.88]">
+              <span className="hero-line-white block break-words text-[clamp(2rem,9vw,5.5rem)] tracking-[0.04em] text-white">
                 JUSTICE DEMANDS
               </span>
-              <span className="hero-line-red mt-1 block text-[clamp(2.5rem,11vw,7.5rem)] tracking-[0.02em] text-signal">
+              <span className="hero-line-red mt-1 block break-words text-[clamp(2rem,10vw,7.5rem)] tracking-[0.02em] text-signal">
                 ACCOUNTABILITY.
               </span>
             </h1>
@@ -250,12 +250,13 @@ export default function HomePage() {
       </section>
 
       {/* Marquee */}
-      <div className="relative overflow-hidden border-y border-white/10 bg-carbon py-5">
-        <div className="absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-carbon to-transparent" />
-        <div className="absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-carbon to-transparent" />
-        <div className="flex animate-marquee whitespace-nowrap">
+      <div className="relative w-full max-w-full overflow-x-clip border-y border-white/10 bg-carbon py-5">
+        <div className="absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-carbon to-transparent sm:w-24" />
+        <div className="absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-carbon to-transparent sm:w-24" />
+        <div className="overflow-x-clip">
+          <div className="flex w-max animate-marquee whitespace-nowrap will-change-transform">
           {[...Array(8)].map((_, i) => (
-            <span key={i} className="mx-6 flex items-center gap-6 font-display text-2xl tracking-[0.2em] text-bone/90 md:text-4xl">
+            <span key={i} className="mx-4 flex shrink-0 items-center gap-4 font-display text-xl tracking-[0.14em] text-bone/90 sm:mx-6 sm:gap-6 sm:text-2xl md:text-4xl">
               FAIRNESS
               <span className="h-1.5 w-1.5 rounded-full bg-signal shadow-[0_0_8px_#E10600]" />
               ACCOUNTABILITY
@@ -263,6 +264,7 @@ export default function HomePage() {
               ASSISTANCE
             </span>
           ))}
+          </div>
         </div>
       </div>
 
@@ -335,7 +337,7 @@ export default function HomePage() {
       </section>
 
       {/* Manifesto — pinned desktop, stacked mobile */}
-      <section ref={manifestoRef} className="relative bg-obsidian lg:min-h-screen">
+      <section ref={manifestoRef} className="relative w-full max-w-full overflow-x-clip bg-obsidian lg:min-h-screen">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(225,6,0,0.08),transparent_50%)]" />
 
         {/* Mobile: stacked stages */}

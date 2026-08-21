@@ -10,7 +10,7 @@ export function SectionHeading({ eyebrow, title, subtitle, align = 'left', class
         </p>
       )}
       {title ? (
-        <h2 className="mt-4 font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.92] text-bone">
+        <h2 className="mt-4 max-w-full break-words font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.92] text-bone">
           {title}
         </h2>
       ) : null}

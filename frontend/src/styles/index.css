@@ -39,11 +39,15 @@
     scroll-behavior: smooth;
     background-color: var(--color-obsidian);
     color: var(--color-bone);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
   }
 
   html.lenis,
   html.lenis body {
     height: auto;
+    overflow-x: clip;
   }
 
   .lenis.lenis-smooth {
@@ -61,6 +65,8 @@
   body {
     margin: 0;
     min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
     font-family: var(--font-body);
     font-size: var(--text-body-md);
     line-height: 1.6;
@@ -68,7 +74,8 @@
     color: var(--color-bone);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    overflow-x: clip;
+    overflow-wrap: break-word;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -102,8 +109,13 @@
   }
 
   img,
-  video {
+  video,
+  svg {
     max-width: 100%;
+  }
+
+  img,
+  video {
     height: auto;
     display: block;
   }
@@ -247,6 +259,12 @@
     z-index: -1;
   }
 
+  @media (max-width: 639px) {
+    .editorial-frame::after {
+      display: none;
+    }
+  }
+
   .text-gradient-red {
     background: linear-gradient(135deg, #f3eee6 0%, #ffffff 40%, #e10600 100%);
     -webkit-background-clip: text;
@@ -331,6 +349,16 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  .overflow-x-clip {
+    overflow-x: clip;
+  }
+
+  .no-horizontal-scroll {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
 }
 
 :focus-visible {
@@ -382,4 +410,7 @@ body.custom-cursor-active label {
   position: relative;
   z-index: 1;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }

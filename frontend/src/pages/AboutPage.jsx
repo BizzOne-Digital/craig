@@ -75,16 +75,16 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-obsidian px-6 py-24 lg:px-10">
+      <section className="w-full max-w-full overflow-x-clip bg-obsidian px-6 py-24 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <h2 className="font-display text-4xl text-bone">Our Journey</h2>
           <p className="mt-4 max-w-2xl text-steel">
             Timeline framework for client-approved milestones. Dates and achievements below are placeholders.
           </p>
-          <div className="mt-12 space-y-8 border-l border-white/10 pl-8">
+          <div className="relative mt-12 space-y-8 border-l border-white/10 pl-6 sm:pl-8">
             {TIMELINE_PLACEHOLDER.map((item) => (
               <div key={item.label} className="relative">
-                <span className="absolute -left-[2.35rem] top-1 h-3 w-3 rounded-full bg-signal" />
+                <span className="absolute left-0 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full bg-signal" />
                 <h3 className="font-display text-xl text-bone">{item.label}</h3>
                 <p className="mt-1 text-sm text-steel italic">{item.note}</p>
               </div>

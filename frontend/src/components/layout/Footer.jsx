@@ -43,7 +43,7 @@ const columns = [
 
 export function Footer() {
   return (
-    <footer className="relative mt-auto overflow-hidden bg-black">
+    <footer className="relative mt-auto w-full max-w-full overflow-x-clip bg-black">
       {/* Top CTA strip */}
       <div className="border-y border-white/10 bg-carbon">
         <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-6 px-4 py-8 sm:flex-row sm:items-center sm:px-5 sm:py-10 lg:px-8">
@@ -98,7 +98,7 @@ export function Footer() {
               <div className="mt-8 space-y-4">
                 <a
                   href="mailto:ceoassociatesllc@gmail.com"
-                  className="group flex items-center gap-3 text-sm text-bone transition hover:text-signal"
+                  className="group flex items-center gap-3 break-all text-sm text-bone transition hover:text-signal"
                 >
                   <span className="flex h-9 w-9 items-center justify-center border border-white/10 text-signal transition group-hover:border-signal">
                     <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -155,7 +155,9 @@ export function Footer() {
         </p>
         <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-steel/60">
           <span className="hidden h-px w-8 bg-signal/50 sm:block" aria-hidden="true" />
-          <span className="uppercase tracking-[0.25em]">Fairness · Accountability · Assistance</span>
+          <span className="max-w-full text-balance uppercase tracking-[0.12em] sm:tracking-[0.25em]">
+            Fairness · Accountability · Assistance
+          </span>
         </div>
       </div>
     </footer>

@@ -36,7 +36,7 @@ export function Header() {
     <>
       <header
         className={cn(
-          'fixed inset-x-0 top-0 z-50 transition-all duration-500',
+          'fixed inset-x-0 top-0 z-50 w-full max-w-full overflow-x-clip transition-all duration-500',
           scrolled || !isHome
             ? 'glass-carbon border-b border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.45)]'
             : 'bg-gradient-to-b from-black/70 via-black/30 to-transparent'

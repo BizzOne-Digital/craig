@@ -14,7 +14,7 @@ export function PublicLayout() {
   useMagneticButtons();
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-obsidian text-bone">
+    <div className="relative min-h-screen w-full max-w-full overflow-x-clip bg-obsidian text-bone">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-signal focus:px-4 focus:py-2 focus:text-white"
@@ -25,7 +25,7 @@ export function PublicLayout() {
       <CinematicIntro />
       <Header />
       <CartDrawer />
-      <main id="main-content" className="min-h-screen pt-[var(--header-height)] pb-mobile-bar lg:pb-0">
+      <main id="main-content" className="min-h-screen w-full max-w-full overflow-x-clip pt-[var(--header-height)] pb-mobile-bar lg:pb-0">
         <PageTransition>
           <Outlet />
         </PageTransition>
