@@ -124,6 +124,9 @@ export function CartDrawer() {
               <span className="text-steel">Subtotal</span>
               <span className="font-semibold text-white">{formatMoney(subtotal)}</span>
             </div>
+            <Link to="/cart#checkout" onClick={closeCart}>
+              <Button className="w-full">Checkout</Button>
+            </Link>
             <Link to="/cart" onClick={closeCart}>
               <Button className="w-full" variant="secondary">
                 View Cart

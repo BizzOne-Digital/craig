@@ -2,6 +2,19 @@ import api from './api.js';
 import { FALLBACK_SERVICES, getFallbackService } from '../data/fallbackServices.js';
 import { FALLBACK_PRODUCTS, getFallbackProduct } from '../data/fallbackProducts.js';
 
+function enrichProduct(product) {
+  if (!product || typeof product !== 'object') return product;
+  const fallback = getFallbackProduct(product.slug);
+  if (!fallback) return product;
+  return {
+    ...fallback,
+    ...product,
+    sizes: product.sizes?.length ? product.sizes : fallback.sizes,
+    colors: product.colors?.length ? product.colors : fallback.colors,
+    images: product.images?.length ? product.images : fallback.images,
+  };
+}
+
 function unwrap(response) {
   const payload = response.data;
   if (payload && typeof payload === 'object' && Object.prototype.hasOwnProperty.call(payload, 'success')) {
@@ -37,7 +50,7 @@ export async function getProduct(slug) {
     const response = await api.get(`/products/${slug}`);
     const result = unwrap(response);
     if (result.data && typeof result.data === 'object') {
-      return result;
+      return { data: enrichProduct(result.data), meta: result.meta };
     }
     const fallback = getFallbackProduct(slug);
     if (fallback) return { data: fallback, meta: null };

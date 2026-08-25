@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import SEO from '../components/ui/SEO.jsx';
 import Button from '../components/ui/Button.jsx';
 import Select from '../components/ui/Select.jsx';
@@ -12,8 +12,12 @@ import { getProduct, getProducts } from '../services/publicApi.js';
 import { formatMoney } from '../utils/format.js';
 import useCart from '../hooks/useCart.js';
 
+const DEFAULT_SIZES = ['S', 'M', 'L', 'XL', '2XL'];
+const DEFAULT_COLORS = ['Red'];
+
 export default function ProductDetailPage() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const { addItem } = useCart();
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState([]);
@@ -30,9 +34,12 @@ export default function ProductDetailPage() {
     setError('');
     getProduct(slug)
       .then((res) => {
-        setProduct(res.data);
-        if (res.data?.sizes?.length) setSize(res.data.sizes[0]);
-        if (res.data?.colors?.length) setColor(res.data.colors[0]);
+        const data = res.data;
+        setProduct(data);
+        const sizes = data?.sizes?.length ? data.sizes : DEFAULT_SIZES;
+        const colors = data?.colors?.length ? data.colors : DEFAULT_COLORS;
+        setSize(sizes[0]);
+        setColor(colors[0]);
       })
       .catch((err) => {
         setProduct(null);
@@ -53,23 +60,6 @@ export default function ProductDetailPage() {
       })
       .catch(() => setRelated([]));
   }, [product]);
-
-  const handleAddToCart = () => {
-    if (!product || product.stock <= 0) return;
-    addItem({
-      productId: product._id,
-      slug: product.slug,
-      name: product.name,
-      price: product.price,
-      image: product.images?.[0]?.url || '',
-      quantity,
-      size,
-      color,
-      stock: product.stock,
-    });
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
-  };
 
   if (loading) {
     return (
@@ -99,6 +89,29 @@ export default function ProductDetailPage() {
 
   const images = product.images?.length ? product.images : [{ url: '', alt: product.name }];
   const inStock = product.stock > 0;
+  const sizeOptions = product.sizes?.length ? product.sizes : DEFAULT_SIZES;
+  const colorOptions = product.colors?.length ? product.colors : DEFAULT_COLORS;
+
+  const handleAddToCart = (goToCheckout = false) => {
+    if (!product || product.stock <= 0) return;
+    if (!size || !color) return;
+    addItem({
+      productId: product._id,
+      slug: product.slug,
+      name: product.name,
+      price: product.price,
+      image: product.images?.[0]?.url || '',
+      quantity,
+      size,
+      color,
+      stock: product.stock,
+    });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+    if (goToCheckout) {
+      navigate('/cart#checkout');
+    }
+  };
 
   return (
     <>
@@ -176,22 +189,22 @@ export default function ProductDetailPage() {
             <p className="mt-6 text-steel">{product.shortDescription}</p>
 
             <div className="mt-8 space-y-4">
-              {product.sizes?.length > 0 && (
-                <Select
-                  label="Size"
-                  value={size}
-                  onChange={(e) => setSize(e.target.value)}
-                  options={product.sizes.map((s) => ({ value: s, label: s }))}
-                />
-              )}
-              {product.colors?.length > 0 && (
-                <Select
-                  label="Color"
-                  value={color}
-                  onChange={(e) => setColor(e.target.value)}
-                  options={product.colors.map((c) => ({ value: c, label: c }))}
-                />
-              )}
+              <Select
+                label="Size"
+                value={size}
+                onChange={(e) => setSize(e.target.value)}
+                options={sizeOptions.map((s) => ({ value: s, label: s }))}
+                required
+                disabled={!inStock}
+              />
+              <Select
+                label="Color"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+                options={colorOptions.map((c) => ({ value: c, label: c }))}
+                required
+                disabled={!inStock}
+              />
               <Input
                 label="Quantity"
                 type="number"
@@ -204,8 +217,19 @@ export default function ProductDetailPage() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <Button variant="primary" onClick={handleAddToCart} disabled={!inStock}>
+              <Button
+                variant="primary"
+                onClick={() => handleAddToCart(false)}
+                disabled={!inStock || !size || !color}
+              >
                 {added ? 'Added to cart' : 'Add to cart'}
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => handleAddToCart(true)}
+                disabled={!inStock || !size || !color}
+              >
+                Buy now
               </Button>
               <Button to="/cart" variant="outline">
                 View cart

@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { cn } from '../../utils/cn.js';
 
 export const Select = forwardRef(function Select(
-  { className, label, error, hint, id, required, children, ...props },
+  { className, label, error, hint, id, required, children, options, placeholder, ...props },
   ref
 ) {
   const inputId = id || props.name;
@@ -32,6 +32,16 @@ export const Select = forwardRef(function Select(
           aria-describedby={error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined}
           {...props}
         >
+          {placeholder ? (
+            <option value="" disabled>
+              {placeholder}
+            </option>
+          ) : null}
+          {options?.map((option) => (
+            <option key={`${option.value}-${option.label}`} value={option.value} disabled={option.disabled}>
+              {option.label}
+            </option>
+          ))}
           {children}
         </select>
         <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-steel">
