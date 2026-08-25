@@ -25,11 +25,27 @@ export default function DisclaimerPage() {
   return (
     <LegalLayout title="Disclaimer" path="/disclaimer">
       <section>
+        <h2 className="font-display text-xl text-bone">Educational & Entertainment Purposes</h2>
+        <p className="mt-3">
+          Content on this website, including articles, merchandise, and general information, is provided for{' '}
+          <strong className="text-bone">educational and entertainment purposes only</strong>. It is not
+          intended as legal advice and should not be relied upon as a substitute for consultation with a
+          licensed attorney regarding your specific situation.
+        </p>
+      </section>
+      <section>
         <h2 className="font-display text-xl text-bone">General Information Only</h2>
         <p className="mt-3">
           Information on this website is provided for general educational and informational purposes only.
-          It is not intended as legal advice and should not be relied upon as a substitute for consultation
-          with a licensed attorney regarding your specific situation.
+          Reading or purchasing merchandise does not create an attorney-client relationship or guarantee
+          any legal outcome.
+        </p>
+      </section>
+      <section>
+        <h2 className="font-display text-xl text-bone">Sponsorship</h2>
+        <p className="mt-3">
+          The Jackson-Lashley Foundation website and related initiatives are sponsored by{' '}
+          <strong className="text-bone">CEO Associates Logistics LLC</strong>.
         </p>
       </section>
       <section>
@@ -47,6 +63,14 @@ export default function DisclaimerPage() {
           Unless explicitly stated and verified, Jackson-Lashley Foundation is not a law firm and does
           not provide legal representation. Use of our services or website does not create an attorney-client
           relationship.
+        </p>
+      </section>
+      <section>
+        <h2 className="font-display text-xl text-bone">Merchandise</h2>
+        <p className="mt-3">
+          Apparel and shop items, including the I Make Cute Kids collection, are offered for awareness and
+          fundraising. Product designs and messaging are for educational and entertainment purposes and do
+          not constitute legal advice or promises of any case result.
         </p>
       </section>
       <section>

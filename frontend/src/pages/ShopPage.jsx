@@ -6,6 +6,7 @@ import Select from '../components/ui/Select.jsx';
 import Skeleton from '../components/ui/Skeleton.jsx';
 import EmptyState from '../components/ui/EmptyState.jsx';
 import Badge from '../components/ui/Badge.jsx';
+import SiteDisclaimer from '../components/ui/SiteDisclaimer.jsx';
 import { getProducts } from '../services/publicApi.js';
 import { formatMoney } from '../utils/format.js';
 
@@ -99,6 +100,9 @@ export default function ShopPage() {
           <p className="mt-6 max-w-2xl text-lg text-steel">
             Every purchase supports our mission to promote fairness and assist families affected by injustice.
           </p>
+          <div className="mt-6 max-w-3xl rounded border border-white/10 bg-carbon/60 px-4 py-3">
+            <SiteDisclaimer compact />
+          </div>
         </div>
       </section>
 

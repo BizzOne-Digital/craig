@@ -1,5 +1,6 @@
 import api from './api.js';
 import { FALLBACK_SERVICES, getFallbackService } from '../data/fallbackServices.js';
+import { FALLBACK_PRODUCTS, getFallbackProduct } from '../data/fallbackProducts.js';
 
 function unwrap(response) {
   const payload = response.data;
@@ -16,14 +17,36 @@ function servicesFallback() {
   return { data: FALLBACK_SERVICES, meta: null };
 }
 
+function productsFallback() {
+  return { data: FALLBACK_PRODUCTS, meta: null };
+}
+
 export async function getProducts(params = {}) {
-  const response = await api.get('/products', { params });
-  return unwrap(response);
+  try {
+    const response = await api.get('/products', { params });
+    const result = unwrap(response);
+    const list = Array.isArray(result.data) ? result.data : [];
+    return list.length > 0 ? result : productsFallback();
+  } catch {
+    return productsFallback();
+  }
 }
 
 export async function getProduct(slug) {
-  const response = await api.get(`/products/${slug}`);
-  return unwrap(response);
+  try {
+    const response = await api.get(`/products/${slug}`);
+    const result = unwrap(response);
+    if (result.data && typeof result.data === 'object') {
+      return result;
+    }
+    const fallback = getFallbackProduct(slug);
+    if (fallback) return { data: fallback, meta: null };
+    throw new Error('Product not found');
+  } catch (error) {
+    const fallback = getFallbackProduct(slug);
+    if (fallback) return { data: fallback, meta: null };
+    throw error;
+  }
 }
 
 export async function getServices(params = {}) {

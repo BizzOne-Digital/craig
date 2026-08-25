@@ -7,6 +7,7 @@ import Input from '../components/ui/Input.jsx';
 import Skeleton from '../components/ui/Skeleton.jsx';
 import EmptyState from '../components/ui/EmptyState.jsx';
 import Badge from '../components/ui/Badge.jsx';
+import SiteDisclaimer from '../components/ui/SiteDisclaimer.jsx';
 import { getProduct, getProducts } from '../services/publicApi.js';
 import { formatMoney } from '../utils/format.js';
 import useCart from '../hooks/useCart.js';
@@ -224,6 +225,7 @@ export default function ProductDetailPage() {
                 <strong className="text-bone">Mission impact:</strong> Proceeds from this shop support the
                 Jackson-Lashley Foundation&apos;s advocacy and assistance programs.
               </p>
+              <SiteDisclaimer compact />
             </div>
           </div>
         </div>

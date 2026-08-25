@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Button from '../ui/Button.jsx';
 import ScalesIcon from '../svg/ScalesIcon.jsx';
+import SiteDisclaimer from '../ui/SiteDisclaimer.jsx';
 
 const columns = [
   {
@@ -87,6 +88,9 @@ export function Footer() {
                   <p className="text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-steel">
                     Foundation
                   </p>
+                  <p className="mt-3 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-signal">
+                    Sponsored by CEO Associates Logistics LLC
+                  </p>
                 </div>
               </div>
 
@@ -145,6 +149,13 @@ export function Footer() {
               ))}
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Disclaimer strip */}
+      <div className="border-b border-white/5 bg-obsidian/80">
+        <div className="mx-auto max-w-[1400px] px-5 py-4 text-center lg:px-8">
+          <SiteDisclaimer />
         </div>
       </div>
 
