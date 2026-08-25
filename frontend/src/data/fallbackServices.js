@@ -1,4 +1,6 @@
 /** Static service catalog used when the API is unavailable (e.g. backend not deployed yet). */
+import { CONSULTATION_SERVICES } from './consultationServices.js';
+
 export const FALLBACK_SERVICES = [
   {
     _id: 'fallback-consulting',
@@ -68,6 +70,7 @@ export const FALLBACK_SERVICES = [
     active: true,
     displayOrder: 3,
   },
+  ...CONSULTATION_SERVICES,
 ];
 
 export function getFallbackService(slug) {

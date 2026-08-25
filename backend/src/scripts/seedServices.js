@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import connectDB from '../config/db.js';
 import Service from '../models/Service.js';
 import { validateEnv } from '../config/env.js';
+import { CONSULTATION_SERVICES } from '../data/consultationServices.js';
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ const services = [
     active: true,
     displayOrder: 3,
   },
+  ...CONSULTATION_SERVICES,
 ];
 
 async function seedServices() {

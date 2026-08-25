@@ -49,11 +49,26 @@ export async function getProduct(slug) {
   }
 }
 
+function mergeServices(apiList) {
+  const bySlug = new Map();
+  for (const service of FALLBACK_SERVICES) {
+    bySlug.set(service.slug, service);
+  }
+  for (const service of apiList) {
+    bySlug.set(service.slug, service);
+  }
+  return [...bySlug.values()].sort(
+    (a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0) || a.title.localeCompare(b.title)
+  );
+}
+
 export async function getServices(params = {}) {
   try {
     const response = await api.get('/services', { params });
     const result = unwrap(response);
-    return Array.isArray(result.data) ? result : servicesFallback();
+    const list = Array.isArray(result.data) ? result.data : [];
+    if (list.length === 0) return servicesFallback();
+    return { data: mergeServices(list), meta: result.meta };
   } catch {
     return servicesFallback();
   }
