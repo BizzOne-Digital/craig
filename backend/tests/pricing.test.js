@@ -40,7 +40,7 @@ describe('pricingService', () => {
 
 describe('fulfillment idempotency logic', () => {
   test('duplicate webhook should be ignored when webhookProcessedAt exists', () => {
-    const order = { webhookProcessedAt: new Date(), orderNumber: 'JLF-TEST' };
+    const order = { webhookProcessedAt: new Date(), orderNumber: 'CEO-TEST' };
     const shouldProcess = !order.webhookProcessedAt;
     expect(shouldProcess).toBe(false);
   });

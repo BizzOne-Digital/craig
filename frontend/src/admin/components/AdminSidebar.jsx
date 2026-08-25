@@ -25,8 +25,8 @@ export default function AdminSidebar() {
   const sidebarContent = (
     <div className="flex h-full flex-col">
       <div className="border-b border-steel/15 px-5 py-6">
-        <p className="font-display text-2xl tracking-[0.12em] text-white">JLF Admin</p>
-        <p className="mt-1 text-xs text-steel">Jackson-Lashley Foundation</p>
+        <p className="font-display text-2xl tracking-[0.12em] text-white">CEO Admin</p>
+        <p className="mt-1 text-xs text-steel">CEO Foundation</p>
       </div>
 
       <nav className="flex-1 space-y-1 px-3 py-4">
@@ -67,7 +67,7 @@ export default function AdminSidebar() {
   return (
     <>
       <div className="sticky top-0 z-30 flex items-center justify-between border-b border-steel/15 bg-obsidian px-4 py-3 lg:hidden">
-        <p className="font-display text-xl tracking-[0.1em] text-white">JLF Admin</p>
+        <p className="font-display text-xl tracking-[0.1em] text-white">CEO Admin</p>
         <button
           type="button"
           onClick={() => setMobileOpen((open) => !open)}

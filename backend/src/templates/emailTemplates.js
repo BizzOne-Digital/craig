@@ -15,12 +15,12 @@ function layout(title, content) {
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="background:${brand.carbon};border-top:3px solid ${brand.signalRed};">
         <tr><td style="padding:32px 28px;">
-          <div style="font-size:12px;letter-spacing:0.2em;color:${brand.signalRed};text-transform:uppercase;">Jackson-Lashley Foundation</div>
+          <div style="font-size:12px;letter-spacing:0.2em;color:${brand.signalRed};text-transform:uppercase;">CEO Foundation</div>
           <h1 style="margin:12px 0 24px;font-size:24px;color:${brand.bone};">${title}</h1>
           ${content}
           <hr style="border:none;border-top:1px solid #2a2a2a;margin:28px 0;" />
           <p style="font-size:12px;color:${brand.steel};line-height:1.6;">
-            Jackson-Lashley Foundation · <a href="mailto:ceoassociatesllc@gmail.com" style="color:${brand.bone};">ceoassociatesllc@gmail.com</a> · 314-267-5674<br/>
+            CEO Foundation · <a href="mailto:ceoassociatesllc@gmail.com" style="color:${brand.bone};">ceoassociatesllc@gmail.com</a> · 314-267-5674<br/>
             Information in this message is general and does not guarantee any legal outcome.
           </p>
         </td></tr>
@@ -46,7 +46,7 @@ export function orderCustomerEmail(order) {
     .join('');
 
   const content = `
-    <p style="line-height:1.7;color:${brand.bone};">Thank you for supporting the Jackson-Lashley Foundation. Your order helps advance fairness, accountability, and meaningful assistance.</p>
+    <p style="line-height:1.7;color:${brand.bone};">Thank you for supporting the CEO Foundation. Your order helps advance fairness, accountability, and meaningful assistance.</p>
     <p style="color:${brand.steel};"><strong style="color:${brand.bone};">Order:</strong> ${order.orderNumber}<br/><strong style="color:${brand.bone};">Date:</strong> ${new Date(order.paidAt || order.createdAt).toLocaleString()}</p>
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;">
       <tr><th align="left" style="padding:8px 0;color:${brand.steel};font-size:12px;">Item</th><th style="padding:8px 0;color:${brand.steel};font-size:12px;">Qty</th><th align="right" style="padding:8px 0;color:${brand.steel};font-size:12px;">Total</th></tr>
@@ -128,7 +128,7 @@ Message:
 ${data.message}
     </pre>`;
 
-  const visitorContent = `<p style="line-height:1.7;color:${brand.bone};">Thank you for contacting the Jackson-Lashley Foundation, ${data.name}.</p>
+  const visitorContent = `<p style="line-height:1.7;color:${brand.bone};">Thank you for contacting the CEO Foundation, ${data.name}.</p>
     <p style="line-height:1.7;color:${brand.steel};">We received your message regarding <strong>${data.subject}</strong> and will respond via ${data.replyMethod}.</p>`;
 
   return {

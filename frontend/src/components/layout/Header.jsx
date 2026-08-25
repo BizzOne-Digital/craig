@@ -44,16 +44,13 @@ export function Header() {
       >
         <div className="relative mx-auto flex h-[var(--header-height)] max-w-[1400px] items-center justify-between gap-2 px-3 sm:gap-4 sm:px-5 lg:px-8">
           {/* Logo */}
-          <Link to="/" className="group relative z-10 flex shrink-0 items-center gap-2 sm:gap-3" aria-label="Jackson-Lashley Foundation home">
+          <Link to="/" className="group relative z-10 flex shrink-0 items-center gap-2 sm:gap-3" aria-label="CEO Foundation home">
             <span className="font-display text-3xl leading-none tracking-[0.06em] text-white transition group-hover:text-signal sm:text-4xl md:text-5xl">
-              JLF
+              CEO
             </span>
             <span className="hidden border-l border-white/20 pl-2 sm:block sm:pl-3">
-              <span className="block font-display text-[0.7rem] leading-tight tracking-[0.18em] text-white sm:text-sm">
-                JACKSON-LASHLEY
-              </span>
-              <span className="block text-[0.55rem] font-semibold uppercase tracking-[0.28em] text-steel sm:text-[0.6rem]">
-                Foundation
+              <span className="block font-display text-[0.7rem] leading-tight tracking-[0.2em] text-white sm:text-sm">
+                FOUNDATION
               </span>
             </span>
           </Link>

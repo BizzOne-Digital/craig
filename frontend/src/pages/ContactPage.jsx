@@ -56,7 +56,7 @@ export default function ContactPage() {
     <>
       <SEO
         title="Contact"
-        description="Contact the Jackson-Lashley Foundation by phone, email, or our secure contact form."
+        description="Contact the CEO Foundation by phone, email, or our secure contact form."
         path="/contact"
       />
 

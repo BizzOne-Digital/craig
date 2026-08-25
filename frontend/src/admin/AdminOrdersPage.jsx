@@ -72,7 +72,7 @@ export default function AdminOrdersPage() {
       const url = window.URL.createObjectURL(blob);
       const anchor = document.createElement('a');
       anchor.href = url;
-      anchor.download = 'jlf-orders.csv';
+      anchor.download = 'CEO-orders.csv';
       anchor.click();
       window.URL.revokeObjectURL(url);
       toast({ title: 'Export ready', message: 'Orders CSV downloaded.', variant: 'success' });

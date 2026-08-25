@@ -89,7 +89,7 @@ export default function ShopPage() {
     <>
       <SEO
         title="Shop"
-        description="Shop with purpose. Every purchase supports the Jackson-Lashley Foundation mission of fairness, accountability, and assistance."
+        description="Shop with purpose. Every purchase supports the CEO Foundation mission of fairness, accountability, and assistance."
         path="/shop"
       />
 

@@ -9,5 +9,5 @@ export function slugify(text) {
 
 export function generateOrderNumber() {
   const segment = () => Math.random().toString(36).slice(2, 6).toUpperCase();
-  return `JLF-${Date.now().toString(36).toUpperCase()}-${segment()}${segment()}`;
+  return `CEO-${Date.now().toString(36).toUpperCase()}-${segment()}${segment()}`;
 }

@@ -179,7 +179,7 @@ export default function PricingPage() {
         <div className="mx-auto max-w-3xl">
           <p className="text-sm leading-relaxed text-steel">
             <strong className="text-bone">Legal Services Disclaimer:</strong> Services provided by the
-            Jackson-Lashley Foundation are for strategic support and review purposes only. They do not
+            CEO Foundation are for strategic support and review purposes only. They do not
             constitute legal advice, do not create an attorney-client relationship, and do not guarantee
             dismissal, acquittal, financial recovery, or any specific legal outcome. Every case is unique
             and results depend on individual circumstances.

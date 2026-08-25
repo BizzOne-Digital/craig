@@ -31,7 +31,7 @@ export async function sendMail({ to, subject, html, text }) {
 
   try {
     await transport.sendMail({
-      from: `"Jackson-Lashley Foundation" <${env.smtp.user}>`,
+      from: `"CEO Foundation" <${env.smtp.user}>`,
       to,
       subject,
       html,

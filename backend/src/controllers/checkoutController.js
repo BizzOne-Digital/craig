@@ -137,7 +137,7 @@ export async function createCheckoutSession(req, res) {
 }
 
 async function ensureStripeCoupon(stripe, discount) {
-  const id = `JLF_${env.discount.code}_${env.discount.type}_${env.discount.value}`.toUpperCase();
+  const id = `CEO_${env.discount.code}_${env.discount.type}_${env.discount.value}`.toUpperCase();
   try {
     await stripe.coupons.retrieve(id);
     return id;
@@ -306,6 +306,6 @@ export async function exportOrdersCsv(req, res) {
     .join('\n');
 
   res.setHeader('Content-Type', 'text/csv');
-  res.setHeader('Content-Disposition', 'attachment; filename="jlf-orders.csv"');
+  res.setHeader('Content-Disposition', 'attachment; filename="CEO-orders.csv"');
   return res.send(header + rows);
 }

@@ -80,13 +80,10 @@ export function Footer() {
                 </div>
                 <div>
                   <p className="font-display text-6xl leading-none tracking-[0.04em] text-white md:text-7xl">
-                    JLF
+                    CEO
                   </p>
-                  <p className="mt-2 font-display text-xl tracking-[0.2em] text-white/90">
-                    JACKSON-LASHLEY
-                  </p>
-                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-steel">
-                    Foundation
+                  <p className="mt-2 font-display text-xl tracking-[0.25em] text-white/90">
+                    FOUNDATION
                   </p>
                   <p className="mt-3 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-signal">
                     Sponsored by CEO Associates Logistics LLC
@@ -162,7 +159,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-4 px-5 py-6 text-center sm:flex-row sm:text-left lg:px-8">
         <p className="text-xs text-steel/70">
-          © {new Date().getFullYear()} Jackson-Lashley Foundation. All rights reserved.
+          © {new Date().getFullYear()} CEO Foundation. All rights reserved.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-steel/60">
           <span className="hidden h-px w-8 bg-signal/50 sm:block" aria-hidden="true" />

@@ -7,7 +7,7 @@ export const blogPosts = [
     category: 'Education',
     readingTime: '6 min read',
     publishedAt: '2025-11-12',
-    author: 'Jackson-Lashley Foundation',
+    author: 'CEO Foundation',
     disclaimer:
       'This article provides general educational information only. It is not legal advice, and reading it does not create an attorney-client relationship.',
     content: [
@@ -26,7 +26,7 @@ export const blogPosts = [
     category: 'Process',
     readingTime: '5 min read',
     publishedAt: '2025-12-03',
-    author: 'Jackson-Lashley Foundation',
+    author: 'CEO Foundation',
     disclaimer:
       'This article provides general educational information only. It is not legal advice, and no consultation can guarantee dismissal, acquittal, or any specific legal result.',
     content: [
@@ -45,7 +45,7 @@ export const blogPosts = [
     category: 'Family Support',
     readingTime: '7 min read',
     publishedAt: '2026-01-18',
-    author: 'Jackson-Lashley Foundation',
+    author: 'CEO Foundation',
     disclaimer:
       'This article provides general educational information only. It is not legal advice and should not replace guidance from licensed professionals.',
     content: [

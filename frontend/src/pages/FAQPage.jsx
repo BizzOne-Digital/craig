@@ -7,7 +7,7 @@ const FAQ_CATEGORIES = [
     name: 'Services',
     items: [
       {
-        q: 'What services does the Jackson-Lashley Foundation offer?',
+        q: 'What services does the CEO Foundation offer?',
         a: 'We offer consulting ($100/hour), pre-trial case review ($3,000), and case strategy & dismissal-focused review (up to $10,000). Each service provides strategic support—not guaranteed legal outcomes.',
       },
       {
@@ -140,7 +140,7 @@ export default function FAQPage() {
     <>
       <SEO
         title="FAQ"
-        description="Frequently asked questions about Jackson-Lashley Foundation services, pricing, shop orders, and policies."
+        description="Frequently asked questions about CEO Foundation services, pricing, shop orders, and policies."
         path="/faq"
         jsonLd={faqJsonLd}
       />

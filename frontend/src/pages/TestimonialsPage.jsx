@@ -21,7 +21,7 @@ export default function TestimonialsPage() {
     <>
       <SEO
         title="Testimonials"
-        description="Published testimonials from individuals who have connected with the Jackson-Lashley Foundation."
+        description="Published testimonials from individuals who have connected with the CEO Foundation."
         path="/testimonials"
       />
 

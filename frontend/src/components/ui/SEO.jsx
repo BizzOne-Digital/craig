@@ -11,7 +11,7 @@ export function SEO({
   noindex = false,
   jsonLd,
 }) {
-  const siteName = 'Jackson-Lashley Foundation';
+  const siteName = 'CEO Foundation';
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const canonical = `${APP_URL}${path.startsWith('/') ? path : `/${path}`}`;
   const ogImage = image || `${APP_URL}/favicon.svg`;

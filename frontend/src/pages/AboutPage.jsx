@@ -21,7 +21,7 @@ export default function AboutPage() {
     <>
       <SEO
         title="About Us"
-        description="Learn about the Jackson-Lashley Foundation mission to promote fairness, accountability, and assistance for families affected by injustice."
+        description="Learn about the CEO Foundation mission to promote fairness, accountability, and assistance for families affected by injustice."
         path="/about"
       />
 
@@ -39,7 +39,7 @@ export default function AboutPage() {
             Advocacy Rooted in <span className="text-gradient-red">Justice</span>
           </h1>
           <p className="mt-8 max-w-2xl text-xl leading-relaxed text-steel">
-            The Jackson-Lashley Foundation was created to support individuals and families navigating
+            The CEO Foundation was created to support individuals and families navigating
             the criminal justice system with clarity, compassion, and strategic direction.
           </p>
         </div>
@@ -52,7 +52,7 @@ export default function AboutPage() {
             <div className="mt-6 space-y-4 text-steel">
               <p>
                 <strong className="text-bone">[PLACEHOLDER — Client to replace]</strong> Share the origin
-                story of the Jackson-Lashley Foundation here. Describe what inspired this work and why
+                story of the CEO Foundation here. Describe what inspired this work and why
                 advocacy matters to your community.
               </p>
               <p>

@@ -109,7 +109,7 @@ export default function BookingPage() {
     <>
       <SEO
         title="Request a Case Review"
-        description="Book a consultation or case review with the Jackson-Lashley Foundation."
+        description="Book a consultation or case review with the CEO Foundation."
         path="/booking"
       />
 

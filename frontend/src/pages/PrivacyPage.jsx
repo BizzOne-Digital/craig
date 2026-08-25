@@ -3,7 +3,7 @@ import SEO from '../components/ui/SEO.jsx';
 function LegalLayout({ title, path, children }) {
   return (
     <>
-      <SEO title={title} description={`${title} for the Jackson-Lashley Foundation.`} path={path} noIndex />
+      <SEO title={title} description={`${title} for the CEO Foundation.`} path={path} noIndex />
       <article className="bg-obsidian">
         <header className="border-b border-white/10 px-6 py-16 lg:px-10">
           <div className="mx-auto max-w-3xl">
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
       <section>
         <h2 className="font-display text-xl text-bone">1. Introduction</h2>
         <p className="mt-3">
-          Jackson-Lashley Foundation (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) respects your privacy.
+          CEO Foundation (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) respects your privacy.
           This Privacy Policy describes how we collect, use, and protect personal information when you visit
           our website, make purchases, or submit inquiries.
         </p>

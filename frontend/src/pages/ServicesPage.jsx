@@ -58,7 +58,7 @@ export default function ServicesPage() {
     <>
       <SEO
         title="Services"
-        description="Consulting, pre-trial case review, and case strategy services from the Jackson-Lashley Foundation. Outcomes vary—no result is guaranteed."
+        description="Consulting, pre-trial case review, and case strategy services from the CEO Foundation. Outcomes vary—no result is guaranteed."
         path="/services"
       />
 

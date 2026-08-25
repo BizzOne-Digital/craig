@@ -3,7 +3,7 @@ import SEO from '../components/ui/SEO.jsx';
 function LegalLayout({ title, path, children }) {
   return (
     <>
-      <SEO title={title} description={`${title} for the Jackson-Lashley Foundation.`} path={path} noIndex />
+      <SEO title={title} description={`${title} for the CEO Foundation.`} path={path} noIndex />
       <article className="bg-obsidian">
         <header className="border-b border-white/10 px-6 py-16 lg:px-10">
           <div className="mx-auto max-w-3xl">
@@ -27,7 +27,7 @@ export default function TermsPage() {
       <section>
         <h2 className="font-display text-xl text-bone">1. Acceptance of Terms</h2>
         <p className="mt-3">
-          By accessing or using the Jackson-Lashley Foundation website, you agree to these Terms of Service.
+          By accessing or using the CEO Foundation website, you agree to these Terms of Service.
           If you do not agree, please do not use our site.
         </p>
       </section>
@@ -48,7 +48,7 @@ export default function TermsPage() {
       <section>
         <h2 className="font-display text-xl text-bone">4. Limitation of Liability</h2>
         <p className="mt-3">
-          To the fullest extent permitted by law, Jackson-Lashley Foundation shall not be liable for any
+          To the fullest extent permitted by law, CEO Foundation shall not be liable for any
           indirect, incidental, or consequential damages arising from use of this website or our services.
         </p>
       </section>

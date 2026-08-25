@@ -13,7 +13,7 @@ export function CartPage() {
     <div className="section-padding">
       <SEO
         title="Cart"
-        description="Review items in your cart and continue to checkout to support the Jackson-Lashley Foundation mission."
+        description="Review items in your cart and continue to checkout to support the CEO Foundation mission."
         path="/cart"
       />
       <div className="container-jlf">

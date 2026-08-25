@@ -3,7 +3,7 @@ import SEO from '../components/ui/SEO.jsx';
 function LegalLayout({ title, path, children }) {
   return (
     <>
-      <SEO title={title} description={`${title} for the Jackson-Lashley Foundation.`} path={path} noIndex />
+      <SEO title={title} description={`${title} for the CEO Foundation.`} path={path} noIndex />
       <article className="bg-obsidian">
         <header className="border-b border-white/10 px-6 py-16 lg:px-10">
           <div className="mx-auto max-w-3xl">
@@ -44,14 +44,14 @@ export default function DisclaimerPage() {
       <section>
         <h2 className="font-display text-xl text-bone">Sponsorship</h2>
         <p className="mt-3">
-          The Jackson-Lashley Foundation website and related initiatives are sponsored by{' '}
+          The CEO Foundation website and related initiatives are sponsored by{' '}
           <strong className="text-bone">CEO Associates Logistics LLC</strong>.
         </p>
       </section>
       <section>
         <h2 className="font-display text-xl text-bone">No Guaranteed Outcomes</h2>
         <p className="mt-3">
-          Jackson-Lashley Foundation services provide strategic support, consulting, and case review.
+          CEO Foundation services provide strategic support, consulting, and case review.
           We do not guarantee dismissal, acquittal, financial recovery, reduced sentences, or any other
           specific legal outcome. Every case is unique and results depend on individual circumstances,
           applicable law, and factors beyond our control.
@@ -60,7 +60,7 @@ export default function DisclaimerPage() {
       <section>
         <h2 className="font-display text-xl text-bone">Not a Law Firm</h2>
         <p className="mt-3">
-          Unless explicitly stated and verified, Jackson-Lashley Foundation is not a law firm and does
+          Unless explicitly stated and verified, CEO Foundation is not a law firm and does
           not provide legal representation. Use of our services or website does not create an attorney-client
           relationship.
         </p>

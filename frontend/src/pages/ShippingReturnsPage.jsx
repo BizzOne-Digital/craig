@@ -3,7 +3,7 @@ import SEO from '../components/ui/SEO.jsx';
 function LegalLayout({ title, path, children }) {
   return (
     <>
-      <SEO title={title} description={`${title} for the Jackson-Lashley Foundation.`} path={path} noIndex />
+      <SEO title={title} description={`${title} for the CEO Foundation.`} path={path} noIndex />
       <article className="bg-obsidian">
         <header className="border-b border-white/10 px-6 py-16 lg:px-10">
           <div className="mx-auto max-w-3xl">

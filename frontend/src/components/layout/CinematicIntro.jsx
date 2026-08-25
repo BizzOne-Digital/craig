@@ -112,7 +112,7 @@ export function CinematicIntro({ onComplete }) {
       <div className="relative z-10 flex flex-col items-center px-6 text-center">
         <div className="intro-line mb-10 h-24 w-px origin-top bg-signal" />
         <p className="intro-jlf font-display text-[clamp(4rem,16vw,9rem)] leading-none tracking-[0.08em] text-white drop-shadow-[0_0_40px_rgba(225,6,0,0.35)]">
-          JLF
+          CEO
         </p>
         <div className="intro-scales mt-8 h-20 w-28 text-signal">
           <ScalesIcon animated />

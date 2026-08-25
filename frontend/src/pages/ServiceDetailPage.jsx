@@ -60,7 +60,7 @@ export default function ServiceDetailPage() {
           '@type': 'Service',
           name: service.title,
           description: service.shortDescription,
-          provider: { '@type': 'Organization', name: 'Jackson-Lashley Foundation' },
+          provider: { '@type': 'Organization', name: 'CEO Foundation' },
           offers: {
             '@type': 'Offer',
             price: service.price,

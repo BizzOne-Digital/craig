@@ -14,7 +14,7 @@ import ArrowIcon from '../components/svg/ArrowIcon.jsx';
 gsap.registerPlugin(ScrollTrigger);
 
 const BUSINESS = {
-  name: 'Jackson-Lashley Foundation',
+  name: 'CEO Foundation',
   email: 'ceoassociatesllc@gmail.com',
   phone: '314-267-5674',
 };
@@ -171,7 +171,7 @@ export default function HomePage() {
     <>
       <SEO
         title="Home"
-        description="Jackson-Lashley Foundation promotes fairness, accountability, and meaningful assistance for individuals and families affected by injustice in the criminal justice system."
+        description="CEO Foundation promotes fairness, accountability, and meaningful assistance for individuals and families affected by injustice in the criminal justice system."
         path="/"
       />
 

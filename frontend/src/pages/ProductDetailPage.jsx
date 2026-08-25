@@ -223,7 +223,7 @@ export default function ProductDetailPage() {
               </p>
               <p>
                 <strong className="text-bone">Mission impact:</strong> Proceeds from this shop support the
-                Jackson-Lashley Foundation&apos;s advocacy and assistance programs.
+                CEO Foundation&apos;s advocacy and assistance programs.
               </p>
               <SiteDisclaimer compact />
             </div>

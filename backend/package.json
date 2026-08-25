@@ -1,7 +1,7 @@
 {
   "name": "jlf-backend",
   "version": "1.0.0",
-  "description": "Jackson-Lashley Foundation API",
+  "description": "CEO Foundation API",
   "type": "module",
   "main": "src/server.js",
   "scripts": {

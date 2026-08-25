@@ -13,9 +13,9 @@ const products = [
     name: 'I Make Cute Kids T-Shirt',
     slug: 'i-make-cute-kids-tee',
     shortDescription:
-      'More than a t-shirt. Your purchase supports the Jackson-Lashley Foundation mission—fairness, accountability, and assistance.',
+      'More than a t-shirt. Your purchase supports the CEO Foundation mission—fairness, accountability, and assistance.',
     description:
-      'Bold red streetwear tee featuring the I Make Cute Kids design on the front and the Jackson-Lashley Foundation mission on the back (Option 2 layout). Printed on demand and shipped directly to you.\n\nYour purchase helps support the Jackson-Lashley Foundation’s mission to promote fairness, accountability, and assistance for individuals and families affected by injustice within the criminal justice system.\n\nContent related to this merchandise is provided for educational and entertainment purposes only. This is not legal advice and does not guarantee any legal outcome.',
+      'Bold red streetwear tee featuring the I Make Cute Kids design on the front and the CEO Foundation mission on the back (Option 2 layout). Printed on demand and shipped directly to you.\n\nYour purchase helps support the CEO Foundation’s mission to promote fairness, accountability, and assistance for individuals and families affected by injustice within the criminal justice system.\n\nContent related to this merchandise is provided for educational and entertainment purposes only. This is not legal advice and does not guarantee any legal outcome.',
     category: 'Apparel',
     baseCost: 28,
     price: 49.99,
@@ -47,9 +47,9 @@ const products = [
     lowStockThreshold: 5,
     featured: true,
     active: true,
-    seoTitle: 'I Make Cute Kids T-Shirt | Jackson-Lashley Foundation Shop',
+    seoTitle: 'I Make Cute Kids T-Shirt | CEO Foundation Shop',
     seoDescription:
-      'Shop the I Make Cute Kids mission tee for $49.99. Supports Jackson-Lashley Foundation advocacy and assistance.',
+      'Shop the I Make Cute Kids mission tee for $49.99. Supports CEO Foundation advocacy and assistance.',
   },
 ];
 

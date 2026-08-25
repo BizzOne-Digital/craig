@@ -65,7 +65,7 @@ export default function AdminLoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-obsidian px-4 py-12">
       <div className="w-full max-w-md border border-steel/20 bg-carbon p-8 shadow-glow">
         <div className="mb-8 text-center">
-          <p className="font-display text-4xl tracking-[0.1em] text-white">JLF Admin</p>
+          <p className="font-display text-4xl tracking-[0.1em] text-white">CEO Admin</p>
           <p className="mt-2 text-sm text-steel">Secure portal for foundation staff</p>
         </div>
 

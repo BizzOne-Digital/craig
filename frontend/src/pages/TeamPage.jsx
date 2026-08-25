@@ -6,7 +6,7 @@ export default function TeamPage() {
     <>
       <SEO
         title="Our Team"
-        description="Leadership information for the Jackson-Lashley Foundation."
+        description="Leadership information for the CEO Foundation."
         path="/team"
       />
 
@@ -19,7 +19,7 @@ export default function TeamPage() {
           <h1 className="mt-6 font-display text-5xl text-bone md:text-7xl">Leadership</h1>
           <div className="mx-auto mt-12 max-w-xl border border-white/10 bg-carbon p-12">
             <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full border-2 border-dashed border-signal/40">
-              <span className="font-display text-3xl text-signal/60">JLF</span>
+              <span className="font-display text-3xl text-signal/60">CEO</span>
             </div>
             <h2 className="font-display text-3xl text-bone">Leadership Information Coming Soon</h2>
             <p className="mt-4 text-steel">

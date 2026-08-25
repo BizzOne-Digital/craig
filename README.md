@@ -1,6 +1,6 @@
-# Jackson-Lashley Foundation
+# CEO Foundation
 
-Production-ready MERN application for the Jackson-Lashley Foundation — a bold, cinematic public website with e-commerce, service intake, and a focused admin portal.
+Production-ready MERN application for the CEO Foundation — a bold, cinematic public website with e-commerce, service intake, and a focused admin portal.
 
 ## Project overview
 
@@ -233,7 +233,7 @@ Tests cover discount validation, server-side totals, auth cookie policy, form va
 
 ## Contact
 
-**Jackson-Lashley Foundation**  
+**CEO Foundation**  
 Email: ceoassociatesllc@gmail.com  
 Phone: 314-267-5674
 
