@@ -1,5 +1,12 @@
 {
   "name": "ceo-foundation",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "workspaces": ["backend", "frontend"],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build:frontend": "npm run build --workspace=jlf-frontend"
+  }
 }

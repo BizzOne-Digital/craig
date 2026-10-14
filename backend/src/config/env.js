@@ -9,7 +9,7 @@ const required = [
   'FRONTEND_URL',
 ];
 
-const requiredInProduction = ['STRIPE_SECRET_KEY', 'STRIPE_WEBHOOK_SECRET'];
+const requiredInProduction = ['STRIPE_SECRET_KEY'];
 
 function getEnv(key, fallback = undefined) {
   const value = process.env[key];

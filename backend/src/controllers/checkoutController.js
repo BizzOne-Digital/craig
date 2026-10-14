@@ -199,6 +199,11 @@ export async function getOrderBySession(req, res) {
 }
 
 export async function handleStripeWebhook(req, res) {
+  if (!env.stripe.webhookSecret) {
+    logger.error('STRIPE_WEBHOOK_SECRET is not configured');
+    return res.status(503).send('Webhook secret not configured');
+  }
+
   const stripe = getStripe();
   const signature = req.headers['stripe-signature'];
 
