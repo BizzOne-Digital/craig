@@ -51,8 +51,11 @@ export function DonateModal({ open, onClose }) {
 
       window.location.href = checkoutUrl;
     } catch (err) {
+      const status = err?.response?.status || err?.status;
       const message =
-        err?.response?.data?.message || err?.message || 'Unable to start checkout. Please try again.';
+        status === 404
+          ? 'Payment API is not reachable. Ensure the backend is deployed and Vercel /api proxy is configured.'
+          : err?.response?.data?.message || err?.message || 'Unable to start checkout. Please try again.';
       setError(message);
       setLoading(false);
     }

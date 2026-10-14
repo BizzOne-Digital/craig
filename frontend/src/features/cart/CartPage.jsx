@@ -98,9 +98,12 @@ export function CartPage() {
 
       window.location.href = checkoutUrl;
     } catch (err) {
+      const status = err.response?.status || err.status;
       const message =
-        err.response?.data?.message ||
-        'Checkout is unavailable right now. Please contact us to complete your order.';
+        status === 404
+          ? 'Checkout API not found. Deploy the backend (Render) and redeploy the frontend after API proxy is set.'
+          : err.response?.data?.message ||
+            'Checkout is unavailable right now. Please contact us to complete your order.';
       setCheckoutError(message);
     } finally {
       setCheckingOut(false);

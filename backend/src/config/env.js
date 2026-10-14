@@ -52,6 +52,10 @@ export const env = {
   port: Number(getEnv('PORT', '5000')),
   mongodbUri: getEnv('MONGODB_URI'),
   frontendUrl: getEnv('FRONTEND_URL'),
+  allowedOrigins: (getEnv('ALLOWED_ORIGINS', '') || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean),
   jwtSecret: getEnv('JWT_SECRET'),
   cookieSecret: getEnv('COOKIE_SECRET'),
   jwtExpiresIn: getEnv('JWT_EXPIRES_IN', '2h'),

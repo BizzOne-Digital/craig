@@ -32,10 +32,27 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
 
-app.use(cors({
-  origin: env.frontendUrl,
-  credentials: true,
-}));
+const corsOrigins = new Set(
+  [env.frontendUrl, ...env.allowedOrigins].filter(Boolean).map((url) => url.replace(/\/$/, ''))
+);
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+      const normalized = origin.replace(/\/$/, '');
+      if (corsOrigins.has(normalized)) {
+        callback(null, true);
+        return;
+      }
+      callback(null, false);
+    },
+    credentials: true,
+  })
+);
 
 app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), handleStripeWebhook);
 
