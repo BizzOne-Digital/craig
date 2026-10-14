@@ -6,7 +6,8 @@
   "functions": {
     "api/index.js": {
       "maxDuration": 30,
-      "includeFiles": "backend/src/**"
+      "includeFiles": "backend/src/**",
+      "excludeFiles": "backend/node_modules/**"
     }
   },
   "rewrites": [

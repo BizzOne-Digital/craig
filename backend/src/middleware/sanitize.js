@@ -1,8 +1,14 @@
-import sanitizeHtml from 'sanitize-html';
+/** Lightweight sanitizer (no sanitize-html) — safe for Vercel serverless bundles. */
+function stripHtml(value) {
+  return value
+    .replace(/<[^>]*>/g, '')
+    .replace(/javascript:/gi, '')
+    .trim();
+}
 
 export function sanitizeInput(value) {
   if (typeof value === 'string') {
-    return sanitizeHtml(value, { allowedTags: [], allowedAttributes: {} }).trim();
+    return stripHtml(value);
   }
   if (Array.isArray(value)) return value.map(sanitizeInput);
   if (value && typeof value === 'object') {
