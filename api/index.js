@@ -1,3 +1,8 @@
+// Force Vercel to trace and bundle runtime dependencies for backend/src imports.
+import 'express';
+import 'mongoose';
+import 'stripe';
+
 import { getApp } from '../backend/src/app.js';
 
 let appInstance;
