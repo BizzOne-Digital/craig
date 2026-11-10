@@ -18,6 +18,7 @@ const donationSchema = new mongoose.Schema(
       default: 'pending',
       index: true,
     },
+    adminEmailSentAt: { type: Date },
     webhookProcessedAt: { type: Date },
     paidAt: { type: Date },
   },

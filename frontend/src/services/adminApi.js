@@ -147,3 +147,28 @@ export async function uploadTestimonialImage(formData) {
   });
   return unwrap(response);
 }
+
+export async function getAdminDonations(params = {}) {
+  const response = await api.get('/admin/donations', { params });
+  return unwrapMeta(response);
+}
+
+export async function exportDonationsCsv(params = {}) {
+  const response = await api.get('/admin/donations/export.csv', { params, responseType: 'blob' });
+  return response.data;
+}
+
+export async function getAdminInquiries(kind, params = {}) {
+  const response = await api.get(`/admin/${kind}`, { params });
+  return unwrapMeta(response);
+}
+
+export async function updateAdminInquiryStatus(kind, id, status) {
+  const response = await api.patch(`/admin/${kind}/${id}`, { status });
+  return unwrap(response);
+}
+
+export async function deleteAdminInquiry(kind, id) {
+  const response = await api.delete(`/admin/${kind}/${id}`);
+  return unwrap(response);
+}

@@ -37,6 +37,8 @@ const AdminServicesPage = lazy(() => import('../admin/AdminServicesPage.jsx'));
 const AdminServiceFormPage = lazy(() => import('../admin/AdminServiceFormPage.jsx'));
 const AdminOrdersPage = lazy(() => import('../admin/AdminOrdersPage.jsx'));
 const AdminOrderDetailPage = lazy(() => import('../admin/AdminOrderDetailPage.jsx'));
+const AdminDonationsPage = lazy(() => import('../admin/AdminDonationsPage.jsx'));
+const AdminInquiriesPage = lazy(() => import('../admin/AdminInquiriesPage.jsx'));
 const AdminTestimonialsPage = lazy(() => import('../admin/AdminTestimonialsPage.jsx'));
 const AdminTestimonialFormPage = lazy(() => import('../admin/AdminTestimonialFormPage.jsx'));
 
@@ -262,6 +264,30 @@ export function AppRoutes() {
         }
       >
         <Route index element={<Navigate to="dashboard" replace />} />
+        <Route
+          path="donations"
+          element={
+            <SuspenseWrap>
+              <AdminDonationsPage />
+            </SuspenseWrap>
+          }
+        />
+        <Route
+          path="bookings"
+          element={
+            <SuspenseWrap>
+              <AdminInquiriesPage kind="bookings" />
+            </SuspenseWrap>
+          }
+        />
+        <Route
+          path="contacts"
+          element={
+            <SuspenseWrap>
+              <AdminInquiriesPage kind="contacts" />
+            </SuspenseWrap>
+          }
+        />
         <Route
           path="dashboard"
           element={

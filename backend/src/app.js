@@ -62,7 +62,9 @@ export async function getApp() {
     })
   );
 
-  app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), handleStripeWebhook);
+  app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), (req, res, next) =>
+    Promise.resolve(handleStripeWebhook(req, res)).catch(next)
+  );
 
   app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser(env.cookieSecret));

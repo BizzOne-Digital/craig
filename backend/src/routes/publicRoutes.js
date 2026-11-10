@@ -1,4 +1,4 @@
-import express from 'express';
+import { safeRouter } from '../utils/asyncHandler.js';
 import { listProducts, getProductBySlug } from '../controllers/productController.js';
 import { listServices, getServiceBySlug } from '../controllers/serviceController.js';
 import { listTestimonials } from '../controllers/testimonialController.js';
@@ -23,7 +23,7 @@ import {
 } from '../validators/schemas.js';
 import { checkoutLimiter, formLimiter } from '../middleware/rateLimit.js';
 
-const router = express.Router();
+const router = safeRouter();
 
 router.get('/products', listProducts);
 router.get('/products/:slug', getProductBySlug);

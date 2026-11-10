@@ -3,6 +3,9 @@ import Product from '../models/Product.js';
 import Service from '../models/Service.js';
 import Order from '../models/Order.js';
 import Testimonial from '../models/Testimonial.js';
+import Donation from '../models/Donation.js';
+import BookingRequest from '../models/BookingRequest.js';
+import ContactInquiry from '../models/ContactInquiry.js';
 import { signToken, authCookieOptions } from '../middleware/auth.js';
 import { fail, success } from '../utils/apiResponse.js';
 
@@ -52,7 +55,7 @@ export async function me(req, res) {
 }
 
 export async function dashboard(_req, res) {
-  const [products, services, orders, pendingOrders, testimonials, recentOrders, lowStockProducts, paidTotals] =
+  const [products, services, orders, pendingOrders, testimonials, recentOrders, lowStockProducts, paidTotals, donationTotals, recentDonations, newBookings, newContacts] =
     await Promise.all([
       Product.countDocuments(),
       Service.countDocuments({ active: true }),
@@ -65,6 +68,13 @@ export async function dashboard(_req, res) {
         { $match: { paymentStatus: 'paid' } },
         { $group: { _id: null, totalRevenue: { $sum: '$total' }, count: { $sum: 1 } } },
       ]),
+      Donation.aggregate([
+        { $match: { paymentStatus: 'paid' } },
+        { $group: { _id: null, total: { $sum: '$amount' }, count: { $sum: 1 } } },
+      ]),
+      Donation.find({ paymentStatus: 'paid' }).sort({ paidAt: -1 }).limit(8),
+      BookingRequest.countDocuments({ status: { $nin: ['contacted', 'closed'] } }),
+      ContactInquiry.countDocuments({ status: { $nin: ['contacted', 'closed'] } }),
     ]);
 
   return success(res, {
@@ -76,7 +86,12 @@ export async function dashboard(_req, res) {
       publishedTestimonials: testimonials,
       paidOrderCount: paidTotals[0]?.count || 0,
       paidRevenueTotal: paidTotals[0]?.totalRevenue || 0,
+      donationCount: donationTotals[0]?.count || 0,
+      donationTotal: donationTotals[0]?.total || 0,
+      newBookings,
+      newContacts,
     },
+    recentDonations,
     recentOrders,
     lowStockProducts,
   });

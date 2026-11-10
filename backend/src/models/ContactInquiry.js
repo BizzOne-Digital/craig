@@ -9,6 +9,7 @@ const contactInquirySchema = new mongoose.Schema(
     message: { type: String, required: true },
     replyMethod: { type: String, default: 'email' },
     consent: { type: Boolean, required: true },
+    status: { type: String, enum: ['new', 'contacted', 'closed'], default: 'new', index: true },
     ipHash: { type: String, default: '' },
   },
   { timestamps: true }

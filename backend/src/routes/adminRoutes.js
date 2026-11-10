@@ -1,4 +1,4 @@
-import express from 'express';
+import { safeRouter } from '../utils/asyncHandler.js';
 import { login, logout, me, dashboard } from '../controllers/adminController.js';
 import {
   adminListProducts,
@@ -28,6 +28,8 @@ import {
   updateTestimonial,
   deleteTestimonial,
 } from '../controllers/testimonialController.js';
+import { adminListDonations, adminGetDonation, exportDonationsCsv } from '../controllers/donationController.js';
+import { bookings, contacts } from '../controllers/inquiryController.js';
 import { requireAdmin } from '../middleware/auth.js';
 import { validate } from '../middleware/errorHandler.js';
 import {
@@ -36,10 +38,12 @@ import {
   serviceSchema,
   testimonialSchema,
   orderUpdateSchema,
+  inquiryStatusSchema,
+  reorderSchema,
 } from '../validators/schemas.js';
 import { loginLimiter } from '../middleware/rateLimit.js';
 
-const router = express.Router();
+const router = safeRouter();
 
 router.post('/auth/login', loginLimiter, validate(loginSchema), login);
 router.post('/auth/logout', logout);
@@ -54,11 +58,11 @@ router.put('/products/:id', requireAdmin, validate(productSchema), updateProduct
 router.delete('/products/:id', requireAdmin, deleteProduct);
 
 router.get('/services', requireAdmin, adminListServices);
+router.patch('/services/reorder', requireAdmin, validate(reorderSchema), reorderServices);
 router.get('/services/:id', requireAdmin, adminGetService);
 router.post('/services', requireAdmin, validate(serviceSchema), createService);
 router.put('/services/:id', requireAdmin, validate(serviceSchema), updateService);
 router.delete('/services/:id', requireAdmin, deleteService);
-router.patch('/services/reorder', requireAdmin, reorderServices);
 
 router.get('/orders', requireAdmin, adminListOrders);
 router.get('/orders/export.csv', requireAdmin, exportOrdersCsv);
@@ -70,5 +74,19 @@ router.get('/testimonials/:id', requireAdmin, adminGetTestimonial);
 router.post('/testimonials', requireAdmin, validate(testimonialSchema), createTestimonial);
 router.put('/testimonials/:id', requireAdmin, validate(testimonialSchema), updateTestimonial);
 router.delete('/testimonials/:id', requireAdmin, deleteTestimonial);
+
+router.get('/donations', requireAdmin, adminListDonations);
+router.get('/donations/export.csv', requireAdmin, exportDonationsCsv);
+router.get('/donations/:id', requireAdmin, adminGetDonation);
+
+router.get('/bookings', requireAdmin, bookings.list);
+router.get('/bookings/:id', requireAdmin, bookings.get);
+router.patch('/bookings/:id', requireAdmin, validate(inquiryStatusSchema), bookings.updateStatus);
+router.delete('/bookings/:id', requireAdmin, bookings.remove);
+
+router.get('/contacts', requireAdmin, contacts.list);
+router.get('/contacts/:id', requireAdmin, contacts.get);
+router.patch('/contacts/:id', requireAdmin, validate(inquiryStatusSchema), contacts.updateStatus);
+router.delete('/contacts/:id', requireAdmin, contacts.remove);
 
 export default router;

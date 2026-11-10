@@ -1,4 +1,5 @@
 import Product from '../models/Product.js';
+import { parsePaging } from '../utils/asyncHandler.js';
 import { slugify } from '../utils/slugify.js';
 import { created, fail, success } from '../utils/apiResponse.js';
 import { deleteImage } from '../services/cloudinaryService.js';
@@ -6,20 +7,20 @@ import { deleteImage } from '../services/cloudinaryService.js';
 const publicSelect = '-baseCost';
 
 export async function listProducts(req, res) {
-  const { page = 1, limit = 20, search = '', category, active, featured, inStock } = req.query;
-  const filter = { active: active === 'false' ? false : true };
+  const { search = '', category, featured, inStock } = req.query;
+  const { page, limit, skip } = parsePaging(req.query);
+  const filter = { active: true };
   if (search) filter.$text = { $search: search };
   if (category) filter.category = category;
   if (featured !== undefined) filter.featured = featured === 'true';
   if (inStock === 'true') filter.stock = { $gt: 0 };
 
-  const skip = (Number(page) - 1) * Number(limit);
   const [items, total] = await Promise.all([
-    Product.find(filter).select(publicSelect).sort({ createdAt: -1 }).skip(skip).limit(Number(limit)),
+    Product.find(filter).select(publicSelect).sort({ createdAt: -1 }).skip(skip).limit(limit),
     Product.countDocuments(filter),
   ]);
 
-  return success(res, items, { page: Number(page), limit: Number(limit), total, pages: Math.ceil(total / Number(limit)) });
+  return success(res, items, { page, limit, total, pages: Math.ceil(total / limit) });
 }
 
 export async function getProductBySlug(req, res) {
@@ -54,7 +55,11 @@ export async function updateProduct(req, res) {
 
   const oldImages = [...product.images];
   Object.assign(product, req.body);
-  if (req.body.slug) product.slug = slugify(req.body.slug);
+  if (req.body.slug) {
+    product.slug = slugify(req.body.slug);
+    const clash = await Product.findOne({ slug: product.slug, _id: { $ne: product._id } });
+    if (clash) return fail(res, 'Slug already exists', 409);
+  }
   await product.save();
 
   const removed = oldImages.filter((old) => !product.images.some((img) => img.publicId === old.publicId));

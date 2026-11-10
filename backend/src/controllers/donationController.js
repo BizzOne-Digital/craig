@@ -1,4 +1,8 @@
+import mongoose from 'mongoose';
 import Donation from '../models/Donation.js';
+import { sendMail } from '../services/mailService.js';
+import { donationAdminEmail } from '../templates/emailTemplates.js';
+import { escapeRegex, csvCell, parsePaging } from '../utils/asyncHandler.js';
 import { env } from '../config/env.js';
 import { generateOrderNumber } from '../utils/slugify.js';
 import { getStripe, isStripeConfigured } from '../services/stripeService.js';
@@ -103,4 +107,85 @@ export async function fulfillPaidDonation(session) {
   }
 
   await donation.save();
+
+  if (!donation.adminEmailSentAt) {
+    const result = await sendMail({
+      to: env.adminNotificationEmail,
+      ...donationAdminEmail(donation, `${env.frontendUrl}/admin/donations`),
+    });
+    if (result.sent) {
+      donation.adminEmailSentAt = new Date();
+      await donation.save();
+    }
+  }
+}
+
+export async function markDonationExpired(session) {
+  if (session.metadata?.kind !== 'donation') return;
+  await Donation.updateOne(
+    { checkoutSessionId: session.id, paymentStatus: 'pending' },
+    { paymentStatus: 'failed' }
+  );
+}
+
+function donationFilter(query) {
+  const filter = {};
+  if (query.paymentStatus) filter.paymentStatus = query.paymentStatus;
+  if (query.search) {
+    const rx = new RegExp(escapeRegex(query.search), 'i');
+    filter.$or = [{ donationNumber: rx }, { 'customer.email': rx }, { 'customer.name': rx }];
+  }
+  return filter;
+}
+
+export async function adminListDonations(req, res) {
+  const { page, limit, skip } = parsePaging(req.query);
+  const filter = donationFilter(req.query);
+  const [items, total, totals] = await Promise.all([
+    Donation.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit),
+    Donation.countDocuments(filter),
+    Donation.aggregate([
+      { $match: { paymentStatus: 'paid' } },
+      { $group: { _id: null, amount: { $sum: '$amount' }, count: { $sum: 1 } } },
+    ]),
+  ]);
+  return success(res, items, {
+    page,
+    limit,
+    total,
+    pages: Math.ceil(total / limit),
+    paidTotal: totals[0]?.amount || 0,
+    paidCount: totals[0]?.count || 0,
+  });
+}
+
+export async function adminGetDonation(req, res) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) return fail(res, 'Donation not found', 404);
+  const donation = await Donation.findById(req.params.id);
+  if (!donation) return fail(res, 'Donation not found', 404);
+  return success(res, donation);
+}
+
+export async function exportDonationsCsv(req, res) {
+  const donations = await Donation.find(donationFilter(req.query)).sort({ createdAt: -1 }).limit(5000);
+  const header = 'Donation Number,Date,Name,Email,Amount,Currency,Status,Paid At\n';
+  const rows = donations
+    .map((d) =>
+      [
+        d.donationNumber,
+        d.createdAt.toISOString(),
+        d.customer?.name,
+        d.customer?.email,
+        d.amount,
+        d.currency,
+        d.paymentStatus,
+        d.paidAt ? d.paidAt.toISOString() : '',
+      ]
+        .map(csvCell)
+        .join(',')
+    )
+    .join('\n');
+  res.setHeader('Content-Type', 'text/csv');
+  res.setHeader('Content-Disposition', 'attachment; filename="CEO-donations.csv"');
+  return res.send(header + rows);
 }

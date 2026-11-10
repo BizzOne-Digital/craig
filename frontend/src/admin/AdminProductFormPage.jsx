@@ -164,7 +164,7 @@ export default function AdminProductFormPage() {
   const onSubmit = async (values) => {
     const payload = {
       ...values,
-      compareAtPrice: values.compareAtPrice === '' || Number.isNaN(values.compareAtPrice) ? undefined : values.compareAtPrice,
+      compareAtPrice: values.compareAtPrice === '' || Number.isNaN(values.compareAtPrice) ? null : values.compareAtPrice,
       sizes: splitList(values.sizes),
       colors: splitList(values.colors),
       images,

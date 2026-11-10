@@ -136,3 +136,15 @@ ${data.message}
     visitor: { subject: 'We Received Your Message', html: layout('Message Received', visitorContent), text: `We received your message about ${data.subject}.` },
   };
 }
+
+export function donationAdminEmail(donation, adminUrl) {
+  const content = `
+    <p style="color:${brand.bone};">A new donation has been received.</p>
+    <p style="color:${brand.steel};"><strong style="color:${brand.bone};">Donation:</strong> ${donation.donationNumber}<br/>
+    <strong style="color:${brand.bone};">Amount:</strong> ${formatMoney(donation.amount, donation.currency)}<br/>
+    <strong style="color:${brand.bone};">Donor:</strong> ${donation.customer?.name || 'Not provided'} · ${donation.customer?.email || 'No email'}<br/>
+    <strong style="color:${brand.bone};">Payment:</strong> ${donation.paymentStatus} · ${donation.paymentIntentId || donation.checkoutSessionId}</p>
+    <p><a href="${adminUrl}" style="display:inline-block;background:${brand.signalRed};color:#fff;padding:12px 18px;text-decoration:none;font-weight:bold;">View Donations in Admin</a></p>`;
+  const text = `New donation ${donation.donationNumber}: ${formatMoney(donation.amount, donation.currency)} from ${donation.customer?.email || 'anonymous'}. Admin: ${adminUrl}`;
+  return { subject: `New Donation · ${formatMoney(donation.amount, donation.currency)}`, html: layout('New Donation', content), text };
+}

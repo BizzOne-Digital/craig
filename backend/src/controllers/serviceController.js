@@ -37,7 +37,11 @@ export async function updateService(req, res) {
   const service = await Service.findById(req.params.id);
   if (!service) return fail(res, 'Service not found', 404);
   Object.assign(service, req.body);
-  if (req.body.slug) service.slug = slugify(req.body.slug);
+  if (req.body.slug) {
+    service.slug = slugify(req.body.slug);
+    const clash = await Service.findOne({ slug: service.slug, _id: { $ne: service._id } });
+    if (clash) return fail(res, 'Slug already exists', 409);
+  }
   await service.save();
   return success(res, service);
 }
@@ -51,7 +55,6 @@ export async function deleteService(req, res) {
 
 export async function reorderServices(req, res) {
   const { items } = req.body;
-  if (!Array.isArray(items)) return fail(res, 'Invalid payload', 400);
   await Promise.all(items.map(({ id, displayOrder }) => Service.findByIdAndUpdate(id, { displayOrder })));
   const services = await Service.find().sort({ displayOrder: 1 });
   return success(res, services);

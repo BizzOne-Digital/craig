@@ -1,10 +1,10 @@
-import express from 'express';
+import { safeRouter } from '../utils/asyncHandler.js';
 import multer from 'multer';
 import { uploadImage } from '../services/cloudinaryService.js';
 import { requireAdmin } from '../middleware/auth.js';
 import { fail, success } from '../utils/apiResponse.js';
 
-const router = express.Router();
+const router = safeRouter();
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -44,5 +44,7 @@ router.post('/testimonials', requireAdmin, upload.single('image'), async (req, r
     return fail(res, error.statusCode === 503 ? 'Image upload unavailable' : 'Upload failed', error.statusCode || 500);
   }
 });
+
+router.use((err, _req, res, _next) => fail(res, err.message || 'Upload failed', err.name === 'MulterError' || err.message === 'Invalid file type' ? 400 : 500));
 
 export default router;

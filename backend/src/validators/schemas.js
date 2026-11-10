@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+const blankToUndefined = (v) => (typeof v === 'string' && v.trim() === '' ? undefined : v);
+
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
@@ -7,7 +9,7 @@ export const loginSchema = z.object({
 
 export const productSchema = z.object({
   name: z.string().min(2).max(200),
-  slug: z.string().min(2).max(200).optional(),
+  slug: z.preprocess(blankToUndefined, z.string().min(2).max(200).optional()),
   shortDescription: z.string().max(500).optional(),
   description: z.string().max(10000).optional(),
   category: z.string().max(100).optional(),
@@ -37,7 +39,7 @@ export const productSchema = z.object({
 
 export const serviceSchema = z.object({
   title: z.string().min(2).max(200),
-  slug: z.string().min(2).max(200).optional(),
+  slug: z.preprocess(blankToUndefined, z.string().min(2).max(200).optional()),
   shortDescription: z.string().max(500).optional(),
   description: z.string().max(10000).optional(),
   price: z.number().min(0),
@@ -153,4 +155,15 @@ export const paginationSchema = z.object({
   discountCode: z.string().optional(),
   dateFrom: z.string().optional(),
   dateTo: z.string().optional(),
+});
+
+export const inquiryStatusSchema = z.object({
+  status: z.enum(['new', 'contacted', 'closed']),
+});
+
+export const reorderSchema = z.object({
+  items: z
+    .array(z.object({ id: z.string().min(1), displayOrder: z.number().int() }))
+    .min(1)
+    .max(200),
 });

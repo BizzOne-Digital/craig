@@ -18,6 +18,7 @@ export function sanitizeInput(value) {
 }
 
 export function sanitizeBody(req, _res, next) {
+  if (req.path.endsWith('/auth/login')) return next();
   if (req.body && typeof req.body === 'object') {
     req.body = sanitizeInput(req.body);
   }

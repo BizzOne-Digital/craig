@@ -75,7 +75,7 @@ export default function AdminDashboardPage() {
     );
   }
 
-  const { stats, recentOrders = [], lowStockProducts = [] } = dashboard || {};
+  const { stats, recentOrders = [], lowStockProducts = [], recentDonations = [] } = dashboard || {};
 
   return (
     <div className="space-y-8">
@@ -101,6 +101,44 @@ export default function AdminDashboardPage() {
           hint={`${stats?.paidOrderCount ?? 0} paid orders`}
         />
       </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <Link to="/admin/donations">
+          <StatCard
+            label="Donations received"
+            value={formatMoney(stats?.donationTotal ?? 0)}
+            hint={`${stats?.donationCount ?? 0} paid donations`}
+          />
+        </Link>
+        <Link to="/admin/bookings">
+          <StatCard label="New bookings" value={stats?.newBookings ?? 0} hint="Waiting for a response" />
+        </Link>
+        <Link to="/admin/contacts">
+          <StatCard label="New messages" value={stats?.newContacts ?? 0} hint="Waiting for a reply" />
+        </Link>
+      </div>
+
+      <section>
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="font-display text-2xl tracking-[0.08em] text-white">Recent donations</h2>
+          <Link to="/admin/donations">
+            <Button variant="ghost" size="sm">
+              View all
+            </Button>
+          </Link>
+        </div>
+        <AdminTable
+          data={recentDonations}
+          emptyTitle="No donations yet"
+          emptyDescription="Paid donations will appear here."
+          columns={[
+            { key: 'donationNumber', header: 'Donation', render: (row) => row.donationNumber },
+            { key: 'donor', header: 'Donor', render: (row) => row.customer?.name || row.customer?.email || 'Anonymous' },
+            { key: 'amount', header: 'Amount', render: (row) => formatMoney(row.amount) },
+            { key: 'paidAt', header: 'Date', render: (row) => formatDate(row.paidAt, { includeTime: true }) },
+          ]}
+        />
+      </section>
 
       <div className="grid gap-8 xl:grid-cols-2">
         <section>

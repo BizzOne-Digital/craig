@@ -12,6 +12,7 @@ const bookingRequestSchema = new mongoose.Schema(
     contactPreference: { type: String, default: 'email' },
     message: { type: String, default: '' },
     consent: { type: Boolean, required: true },
+    status: { type: String, enum: ['new', 'contacted', 'closed'], default: 'new', index: true },
     ipHash: { type: String, default: '' },
   },
   { timestamps: true }

@@ -9,7 +9,8 @@ import { sendMail } from '../services/mailService.js';
 import { orderCustomerEmail, orderAdminEmail } from '../templates/emailTemplates.js';
 import { created, fail, success } from '../utils/apiResponse.js';
 import logger from '../utils/logger.js';
-import { fulfillPaidDonation } from './donationController.js';
+import { fulfillPaidDonation, markDonationExpired } from './donationController.js';
+import { escapeRegex, csvCell, parsePaging } from '../utils/asyncHandler.js';
 
 export async function getCheckoutSettings(req, res) {
   return success(res, {
@@ -224,6 +225,15 @@ export async function handleStripeWebhook(req, res) {
     }
   }
 
+  if (event.type === 'checkout.session.expired' || event.type === 'checkout.session.async_payment_failed') {
+    const session = event.data.object;
+    if (session.metadata?.kind === 'donation') {
+      await markDonationExpired(session);
+    } else {
+      await Order.updateOne({ checkoutSessionId: session.id, paymentStatus: 'pending' }, { paymentStatus: 'failed' });
+    }
+  }
+
   return res.json({ received: true });
 }
 
@@ -273,36 +283,39 @@ export async function fulfillPaidOrder(session) {
   }
 }
 
-export async function adminListOrders(req, res) {
-  const { page = 1, limit = 20, search, paymentStatus, fulfillmentStatus, discountCode, sort = '-createdAt' } = req.query;
+function orderFilter(query) {
+  const { search, paymentStatus, fulfillmentStatus, discountCode } = query;
   const filter = {};
   if (paymentStatus) filter.paymentStatus = paymentStatus;
   if (fulfillmentStatus) filter.fulfillmentStatus = fulfillmentStatus;
-  if (discountCode) filter.discountCode = discountCode.toUpperCase();
+  if (discountCode) filter.discountCode = String(discountCode).toUpperCase();
   if (search) {
-    filter.$or = [
-      { orderNumber: new RegExp(search, 'i') },
-      { 'customer.email': new RegExp(search, 'i') },
-      { 'customer.name': new RegExp(search, 'i') },
-    ];
+    const rx = new RegExp(escapeRegex(search), 'i');
+    filter.$or = [{ orderNumber: rx }, { 'customer.email': rx }, { 'customer.name': rx }];
   }
+  return filter;
+}
 
-  const skip = (Number(page) - 1) * Number(limit);
+export async function adminListOrders(req, res) {
+  const { page, limit, skip } = parsePaging(req.query);
+  const filter = orderFilter(req.query);
   const [items, total] = await Promise.all([
-    Order.find(filter).sort(sort).skip(skip).limit(Number(limit)),
+    Order.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit),
     Order.countDocuments(filter),
   ]);
 
-  return success(res, items, { page: Number(page), limit: Number(limit), total, pages: Math.ceil(total / Number(limit)) });
+  return success(res, items, { page, limit, total, pages: Math.ceil(total / limit) });
 }
 
 export async function adminGetOrder(req, res) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) return fail(res, 'Order not found', 404);
   const order = await Order.findById(req.params.id);
   if (!order) return fail(res, 'Order not found', 404);
   return success(res, order);
 }
 
 export async function adminUpdateOrder(req, res) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) return fail(res, 'Order not found', 404);
   const order = await Order.findById(req.params.id);
   if (!order) return fail(res, 'Order not found', 404);
 
@@ -318,20 +331,22 @@ export async function adminUpdateOrder(req, res) {
 }
 
 export async function exportOrdersCsv(req, res) {
-  const orders = await Order.find().sort({ createdAt: -1 }).limit(5000);
+  const orders = await Order.find(orderFilter(req.query)).sort({ createdAt: -1 }).limit(5000);
   const header = 'Order Number,Date,Customer,Email,Total,Payment,Fulfillment,Discount\n';
   const rows = orders
     .map((o) =>
       [
         o.orderNumber,
         o.createdAt.toISOString(),
-        `"${o.customer.name.replace(/"/g, '""')}"`,
+        o.customer.name,
         o.customer.email,
         o.total,
         o.paymentStatus,
         o.fulfillmentStatus,
         o.discountCode || '',
-      ].join(',')
+      ]
+        .map(csvCell)
+        .join(',')
     )
     .join('\n');
 
